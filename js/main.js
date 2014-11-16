@@ -29,20 +29,18 @@ $(function () {
     }
 
     function initialize() {
-        board = new Array(false, false, false, false, false, false, false, false, false);
+        board = [false, false, false, false, false, false, false, false, false];
 
         for (var I = 0; I < seed; I++)
             board[Math.floor(Math.random() * 10)] = true;
 
-        //document.getElementById("scoreText").value = "";
         for (var I = 0; I < 9; I++) {
-            var id = "img" + I;
+            var id = "#img" + I;
             if (board[I] == true) {
-                //document.getElementById("scoreText").value = document.getElementById("scoreText").value+", "+I;
-                document.getElementById(id).src = "image\\dancingmouse.gif";
+                $(id).attr("src", "image\\dancingmouse.gif");
             }
             else {
-                document.getElementById(id).src = "image\\Cat_Watching_Mouse.gif";
+                $(id).attr("src", "image\\Cat_Watching_Mouse.gif");
             }
         }
     }
@@ -61,14 +59,20 @@ $(function () {
             interval -= 50;
         seed++;
         time = time + 1;
-        //document.getElementById('scoreText').value = time;
         setTimeout(start, interval);
     }
 
-    function changeState(id) {
-        var pathRecent = document.getElementById(id).src;
+
+
+    $("#start").click(function () {
+        start();
+    });
+
+
+    $("input.modify").click(function () {
+        var pathRecent = $(this).attr("src");
         var pathNext;
-        var imageNo = id[3];
+        var imageNo = $(this).attr("id")[3];
 
         if (board[imageNo] == true) {
             board[imageNo] = false;
@@ -79,17 +83,7 @@ $(function () {
             pathNext = pathRecent;
             penalty++;
         }
-        document.getElementById(id).src = pathNext;
-        document.getElementById("scoreText").value = score;
-    }
-
-
-
-    $("#start").click(function () {
-        start();
-    });
-
-    $("input.modify").click(function () {
-        changeState($(this).attr("id"));
+        $(this).attr("src", pathNext);
+        $("#scoreText").attr("value", score);
     });
 });
