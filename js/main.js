@@ -7,38 +7,11 @@ $(function () {
 
     var penalty = 0;
     var score = 0;
-    var seed = 3;
+    var seed = 0;
     var time = 0;
     var interval = 3000;
 
-    function checkGameOver() {
-
-        for (var I = 0; I < 9; I++)
-            if (board[I] == true)
-                penalty++;
-
-        //Game Over & re-initialize for next game
-        if (penalty > 10) {
-            alert("game over\n" + "your score is " + score);
-            score = 0;
-            penalty = 0;
-            time = 0;
-            interval = 3000;
-            seed = 0;
-            initialize();
-            seed = 3;
-            $("#scoreText").val(score);
-            return true;
-        }
-        return false;
-    }
-
-    function initialize() {
-        board = [false, false, false, false, false, false, false, false, false];
-
-        for (var I = 0; I < seed; I++)
-            board[Math.floor(Math.random() * 10)] = true;
-
+    function showImageByBoard() {
         for (var I = 0; I < 9; I++) {
             var id = "#img" + I;
             if (board[I] == true) {
@@ -50,25 +23,60 @@ $(function () {
         }
     }
 
-    function start() {
-        if (checkGameOver() == true)
-            return;
-        initialize();
+    function initializeGame() {
+        penalty = 0;
+        score = 0;
+        seed = 0;
+        time = 0;
+        interval = 3000;
+    }
 
-        if (interval > 500)
-            interval -= 50;
+    function isGameOver() {
+        for (var I = 0; I < 9; I++)
+            if (board[I] == true)
+                penalty++;
+        return (penalty > 10);
+    }
+
+    function gameOver() {
+        alert("game over\n" + "your score is " + score);
+        $("#scoreText").val(0);
+        board = [false, false, false, false, false, false, false, false, false];
+        showImageByBoard();
+    }
+
+    function resetNextTurn() {
+        board = [false, false, false, false, false, false, false, false, false];
+        time++;
         seed++;
-        time = time + 1;
-        setTimeout(start, interval);
+        for (var I = 0; I < seed; I++) {
+            board[Math.floor(Math.random() * 10)] = true;
+        }
+        showImageByBoard()
+    }
+
+    function continueGame() {
+        if (isGameOver() == true) {
+            gameOver();
+            return;
+        }
+
+        resetNextTurn();
+        if (interval > 500) {
+            interval -= 50;
+        }
+        setTimeout(continueGame, interval);
     }
 
 
 
+    // Start Game
     $("#start").click(function () {
-        start();
+        initializeGame();
+        continueGame();
     });
 
-
+    // After Click on Running Game
     $("input.modify").click(function () {
         var pathRecent = $(this).attr("src");
         var pathNext;
