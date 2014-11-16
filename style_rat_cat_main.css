@@ -6,16 +6,16 @@ body
 
 input.modify
 {
-	width:100;
-	height: 100;
+	width:100px;
+	height: 100px;
 }
 
 input.start_button_modify
 {
 	position:absolute;
-	top: 450;
+	top: 450px;
 	left:110px;
-	width: 100;
+	width: 100px;
 	height: 35;
 	text-decoration:blink; 
 	font-weight: bold;
@@ -29,8 +29,8 @@ img.image_modify
 	position:absolute;
 	left:600px;
 	top: 80px;
-	width: 200;
-	height:200;
+	width: 200px;
+	height:200px;
 }
 
 p.modify
@@ -47,8 +47,8 @@ input.score_modify
 	position:absolute;
 	left:700px;
 	top: 300px;
-	width: 100;
-	height:50;
+	width: 100px;
+	height:50px;
 	background-color:black;
 	color: red;
 	font-size: 40px;
