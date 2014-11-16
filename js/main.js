@@ -12,6 +12,11 @@ $(function () {
     var interval = 3000;
 
     function checkGameOver() {
+
+        for (var I = 0; I < 9; I++)
+            if (board[I] == true)
+                penalty++;
+
         //Game Over & re-initialize for next game
         if (penalty > 10) {
             alert("game over\n" + "your score is " + score);
@@ -22,7 +27,7 @@ $(function () {
             seed = 0;
             initialize();
             seed = 3;
-            document.getElementById("scoreText").value = score;
+            $("#scoreText").val(score);
             return true;
         }
         return false;
@@ -46,11 +51,6 @@ $(function () {
     }
 
     function start() {
-
-        for (var I = 0; I < 9; I++)
-            if (board[I] == true)
-                penalty++;
-
         if (checkGameOver() == true)
             return;
         initialize();
