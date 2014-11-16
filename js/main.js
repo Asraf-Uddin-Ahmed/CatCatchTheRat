@@ -84,6 +84,6 @@ $(function () {
             penalty++;
         }
         $(this).attr("src", pathNext);
-        $("#scoreText").attr("value", score);
+        $("#scoreText").val(score);
     });
 });
