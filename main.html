@@ -1,0 +1,138 @@
+<html>
+
+<head>
+	<title>Rat & Cat</title>
+</head>
+
+<style type="text/css">
+	@import url("style_rat_cat_main.css");
+</style>
+
+<script language="javascript">
+	
+	var board = new Array(false, false, false, false, false, false, false, false, false);
+	
+	var penalty = 0;
+	var score = 0;
+	var seed = 3;
+	var time = 0;
+	var interval = 3000;
+	
+	function checkGameOver(){
+		//Game Over & re-initialize for next game
+		if( penalty>10 ){
+			alert("game over\n"+"your score is "+score);
+			score = 0;
+			penalty = 0;
+			time = 0;
+			interval = 3000;
+			seed = 0;
+			initialize();
+			seed = 3;
+			document.getElementById("scoreText").value = score;
+			return true;
+		}
+		return false;
+	}
+	
+	function start(){
+	
+		for(var I=0; I<9; I++)
+			if( board[I]==true )
+				penalty++;
+		
+		if( checkGameOver()==true )
+			return ;
+		initialize();
+		
+		if( interval>500 )
+			interval -= 50;
+		seed++;
+		time = time+1;
+		//document.getElementById('scoreText').value = time;
+		setTimeout("start()", interval);
+	}
+	
+	function changeState(id)
+	{
+		var pathRecent = document.getElementById(id).src;
+		var pathNext;
+		var imageNo = id[3];
+		
+		if( board[imageNo]==true ){
+			board[imageNo] = false;
+			score++;
+			pathNext = "image\\catnmos.gif";
+		}
+		else{
+			pathNext = pathRecent;
+			penalty++;
+		}
+		document.getElementById(id).src = pathNext;
+		document.getElementById("scoreText").value = score;
+	}
+	
+	function initialize()
+	{
+		board = new Array(false, false, false, false, false, false, false, false, false);
+		
+		for(var I=0; I<seed; I++)
+			board[Math.floor(Math.random()*10)] = true;
+		
+		//document.getElementById("scoreText").value = "";
+		for(var I=0; I<9; I++){
+			var id = "img"+I;
+			if( board[I]==true ){
+				//document.getElementById("scoreText").value = document.getElementById("scoreText").value+", "+I;
+				document.getElementById(id).src = "image\\dancingmouse.gif";
+			}
+			else{
+				document.getElementById(id).src = "image\\Cat_Watching_Mouse.gif";
+			}
+		}
+	}
+	
+</script>
+
+<body>
+	
+	<h1>Rat & Cat</h1>
+	
+	<input class="modify" type="image" src="image\\Cat_Watching_Mouse.gif" alt="not found" id="img0" onclick="changeState('img0')" />
+	<input class="modify" type="image" src="image\\Cat_Watching_Mouse.gif" alt="not found" id="img1" onclick="changeState('img1')" />
+	<input class="modify" type="image" src="image\\Cat_Watching_Mouse.gif" alt="not found" id="img2" onclick="changeState('img2')" />
+	<br/>
+	<input class="modify" type="image" src="image\\Cat_Watching_Mouse.gif" alt="not found" id="img3" onclick="changeState('img3')" />
+	<input class="modify" type="image" src="image\\Cat_Watching_Mouse.gif" alt="not found" id="img4" onclick="changeState('img4')" />
+	<input class="modify" type="image" src="image\\Cat_Watching_Mouse.gif" alt="not found" id="img5" onclick="changeState('img5')" />
+	<br/>
+	<input class="modify" type="image" src="image\\Cat_Watching_Mouse.gif" alt="not found" id="img6" onclick="changeState('img6')" />
+	<input class="modify" type="image" src="image\\Cat_Watching_Mouse.gif" alt="not found" id="img7" onclick="changeState('img7')" />
+	<input class="modify" type="image" src="image\\Cat_Watching_Mouse.gif" alt="not found" id="img8" onclick="changeState('img8')" />
+	<br/>
+	
+	<input class="start_button_modify" type="button" id="start" value="Start" onclick="start()" />
+	<img class="image_modify" src="image\\Mouse.gif" alt="RAT" />
+	<p class="modify">Score:</p>
+	<input class="score_modify" type="text" id="scoreText" value="0" />
+	
+	<form class="modify" >
+		<table border="10" >
+		<tr>
+		<td>
+			<address>
+				<b>Asraf Uddin Ahmed (Ratul) </b></br>
+				ID: IT-09047 </br>
+				MBSTU, Tnagail. </br>
+				Mobile no : +8801916144845 </br>
+							+8801673725106 </br>
+				E-mail : <a href="mailto:13ratul@gmail.com">13ratul@gmail.com </a>
+			</address>
+		</td>
+		</tr>
+		</table>
+	</form>
+
+</body>
+
+</html>
