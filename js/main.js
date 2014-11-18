@@ -69,9 +69,15 @@ $(function () {
     }
 
 
+    // After window loaded
+    $(window).load(function () {
+        SoundManager.addEventToPlayBackgroundSoundInLoop();
+        SoundManager.playBackgroundSound();
+    });
 
     // Start Game
     $("#start").click(function () {
+        SoundManager.playWhistle();
         initializeGame();
         continueGame();
     });
@@ -83,11 +89,13 @@ $(function () {
         var imageNo = $(this).attr("id")[3];
 
         if (board[imageNo] == true) {
+            SoundManager.playRatDeath();
             board[imageNo] = false;
             score++;
             pathNext = "image\\catnmos.gif";
         }
         else {
+            SoundManager.playCatMeow();
             pathNext = pathRecent;
             penalty++;
         }
