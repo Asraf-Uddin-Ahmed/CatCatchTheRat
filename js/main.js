@@ -39,13 +39,13 @@ $(function () {
     }
 
     function gameOver() {
+        $("#gameOverMessage").html("Game Over <br> Your score is " + score);
         $("#playGround").fadeOut("fast", function () {
             $("#gameOver").fadeIn("fast");
+            $("#scoreText").val(0);
+            board = [false, false, false, false, false, false, false, false, false];
+            showImageByBoard();
         });
-        $("#gameOverMessage").html("Game Over <br> Your score is " + score);
-        $("#scoreText").val(0);
-        board = [false, false, false, false, false, false, false, false, false];
-        showImageByBoard();
     }
 
     function resetNextTurn() {
