@@ -60,3 +60,20 @@ input.modify {
     width: 50%;
     margin: 0 auto;
 }
+
+#gameOverImage {
+    height: 310px;
+    width: 300px;
+}
+
+#gameOver {
+    display: none;
+    font-size: 20px;
+}
+
+#gameOverMessage {
+    color: red;
+    font-weight: bold;
+    margin-top: -70px;
+    margin-left: 25px;
+}

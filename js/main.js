@@ -39,7 +39,10 @@ $(function () {
     }
 
     function gameOver() {
-        alert("game over\n" + "your score is " + score);
+        $("#playGround").fadeOut("fast", function () {
+            $("#gameOver").fadeIn("fast");
+        });
+        $("#gameOverMessage").html("Game Over <br> Your score is " + score);
         $("#scoreText").val(0);
         board = [false, false, false, false, false, false, false, false, false];
         showImageByBoard();
@@ -77,6 +80,10 @@ $(function () {
 
     // Start Game
     $("#start").click(function () {
+        $("#gameOver").fadeOut("fast", function () {
+            $("#playGround").fadeIn("fast");
+        });
+
         SoundManager.playWhistle();
         initializeGame();
         continueGame();
