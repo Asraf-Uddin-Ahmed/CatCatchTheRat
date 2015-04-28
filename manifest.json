@@ -1,7 +1,7 @@
 {
 	"name": "Cat!!! Catch the Rat",
 	"description": "This is a funny game.",
-	"version": "1.0",
+	"version": "1.1",
 	"manifest_version": 2,
   
 	"app": {
